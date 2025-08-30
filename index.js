@@ -50,7 +50,14 @@ function createBot() {
   bot.on('spawn', () => {
     bot.chat('/register aagop04');
     setTimeout(() => bot.chat('/login aagop04'), 1000);
-    setTimeout(() => bot.chat('/tp -247 200 62'), 2000);
+    setTimeout(() => bot.chat('/tp 0 64 0'), 2000);
+
+    // 💡 Apply regeneration effect for 3 hours
+    setTimeout(() => {
+      bot.chat(`/effect give PUTTUR_SMP minecraft:regeneration 10800 1`);
+      console.log("Applied regeneration effect for 3 hours.");
+    }, 3000);
+
     startHumanLikeBehavior();
     scheduleRandomDisconnect();
   });
@@ -103,7 +110,7 @@ function createBot() {
   bot.on('end', () => {
     botInstance = null;
     if (!reconnecting) {
-      const delay = Math.floor(Math.random() * 21 + 10) * 1000;
+      const delay = Math.floor(Math.random() * 6 + 5) * 1000;
       console.log(`Bot disconnected. Reconnecting in ${delay / 1000} seconds...`);
       setTimeout(createBot, delay);
     }
